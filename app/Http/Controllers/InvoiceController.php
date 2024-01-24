@@ -21,4 +21,15 @@ class InvoiceController extends Controller
             'invoiceCount' => count($invoices),
         ]);
     }
+
+    public function show($invoiceId)
+    {
+        $invoice = DB::table('invoices')
+            ->where('InvoiceId', '=', $invoiceId)
+            ->first();
+
+        return view('invoice', [
+            'invoice' => $invoice,
+        ]);
+    }
 }
