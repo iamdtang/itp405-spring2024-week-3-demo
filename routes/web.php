@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/invoices', function () {
-    $invoices = DB::table('invoices')
-        ->join('customers', 'invoices.CustomerId', '=', 'customers.CustomerId')
-        ->orderBy('invoices.InvoiceDate', 'DESC')
-        ->get();
-
-    // dd($invoices);
-
-    return view('invoices', [
-        'invoices' => $invoices,
-        'invoiceCount' => count($invoices),
-    ]);
-});
+Route::get('/invoices', [InvoiceController::class, 'index']);
