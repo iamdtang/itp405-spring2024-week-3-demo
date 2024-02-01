@@ -9,8 +9,15 @@ class Invoice extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'InvoiceId';
+
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'CustomerId');
+    }
+
+    public function invoiceItems()
+    {
+        return $this->hasMany(InvoiceItem::class, 'InvoiceId', 'InvoiceId');
     }
 }
